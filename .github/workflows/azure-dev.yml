@@ -72,14 +72,43 @@ jobs:
         env:
           AZD_INITIAL_ENVIRONMENT_CONFIG: ${{ secrets.AZD_INITIAL_ENVIRONMENT_CONFIG }}
 
-      - name: Export azd env vars to GitHub Actions environment
+     # - name: Export azd env vars to GitHub Actions environment
+     #   shell: bash
+     #   run: |
+     #     set -e
+     #     ENV_FILE=".azure/${AZURE_ENV_NAME}/.env"
+     #     echo "Loading $ENV_FILE"
+     #     test -f "$ENV_FILE"
+     #     grep -v '^\s*#' "$ENV_FILE" | grep -E '^[A-Za-z_][A-Za-z0-9_]*=' >> "$GITHUB_ENV"
+
+      - name: Export azd env vars to GitHub Actions environment (strip quotes)
         shell: bash
         run: |
           set -e
           ENV_FILE=".azure/${AZURE_ENV_NAME}/.env"
           echo "Loading $ENV_FILE"
           test -f "$ENV_FILE"
-          grep -v '^\s*#' "$ENV_FILE" | grep -E '^[A-Za-z_][A-Za-z0-9_]*=' >> "$GITHUB_ENV"
+
+          while IFS= read -r line; do
+            # skip blank lines and comments
+            [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
+
+            # only KEY=VALUE lines
+            if [[ "$line" =~ ^[A-Za-z_][A-Za-z0-9_]*= ]]; then
+              key="${line%%=*}"
+              val="${line#*=}"
+
+              # trim whitespace
+              val="${val#"${val%%[![:space:]]*}"}"
+              val="${val%"${val##*[![:space:]]}"}"
+
+              # strip surrounding single or double quotes
+              val="${val%\"}"; val="${val#\"}"
+              val="${val%\'}"; val="${val#\'}"
+
+              echo "$key=$val" >> "$GITHUB_ENV"
+            fi
+          done < "$ENV_FILE"
 
       - name: Normalize AZURE_CONTAINER_APP_URL (strip quotes)
         shell: bash
