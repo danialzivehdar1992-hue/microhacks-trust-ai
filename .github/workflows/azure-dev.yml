@@ -27,7 +27,7 @@ jobs:
       AZURE_CHAT_MODEL_VERSION: ${{ vars.AZURE_CHAT_MODEL_VERSION }}
       AZURE_EMBEDDING_MODEL: ${{ vars.AZURE_EMBEDDING_MODEL }}
 
-      # project specific
+      # project specific vars
       #AZURE_CONTAINER_APP_URL: ${{ vars.AZURE_CONTAINER_APP_URL }}
       AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
 
