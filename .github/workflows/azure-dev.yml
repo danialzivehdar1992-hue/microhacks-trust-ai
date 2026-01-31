@@ -197,3 +197,72 @@ jobs:
         with:
           name: eval_results_target
           path: evals/results/quality/results_target.jsonl
+
+      - name: Summarize evaluation results (markdown)
+        shell: bash
+        run: |
+          set -e
+          python - <<'PY'
+          import json, statistics, pathlib
+
+          path = pathlib.Path("evals/results/quality/results_target.jsonl")
+          if not path.exists():
+            raise SystemExit(f"Missing results file: {path}")
+
+          rows=[]
+          for line in path.read_text(encoding="utf-8").splitlines():
+            line=line.strip()
+            if line:
+              rows.append(json.loads(line))
+
+          def pick_score(r, key):
+            # defensive: supports a few common shapes
+            if isinstance(r, dict):
+              ev = r.get("evaluations", {})
+              if isinstance(ev, dict) and key in ev:
+                v = ev[key]
+                if isinstance(v, dict): return v.get("score")
+                return v
+              if key in r:
+                v = r[key]
+                if isinstance(v, dict): return v.get("score")
+                return v
+            return None
+
+          def clean(xs):
+            out=[]
+            for x in xs:
+              if isinstance(x, (int,float)):
+                out.append(float(x))
+            return out
+
+          rel = clean([pick_score(r,"relevance") for r in rows])
+          grd = clean([pick_score(r,"groundedness") for r in rows])
+
+          def mean(xs):
+            return round(statistics.mean(xs), 4) if xs else "n/a"
+
+          md = []
+          md.append("## ✅ RAG Evaluation Results (Target App)")
+          md.append("")
+          md.append(f"- Samples: **{len(rows)}**")
+          md.append(f"- Relevance mean: **{mean(rel)}**")
+          md.append(f"- Groundedness mean: **{mean(grd)}**")
+          md.append("")
+          md.append("Artifacts:")
+          md.append("- `evals/results/quality/results_target.jsonl`")
+
+          out = pathlib.Path("evals/results/quality/eval_summary.md")
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_text("\n".join(md), encoding="utf-8")
+          print(out)
+          PY
+
+      - name: Upload evaluation artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: eval_results_target
+          path: |
+            evals/results/quality/results_target.jsonl
+            evals/results/quality/eval_summary.md
