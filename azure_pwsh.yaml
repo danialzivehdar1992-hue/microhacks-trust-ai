@@ -1,0 +1,57 @@
+###
+# pwsh version of azure.yaml
+# Uses PowerShell syntax for the postprovision hook
+# This file is intended for environments where PowerShell is the preferred shell
+# Replace contents of the existing azure.yaml with this file to use PowerShell commands
+###
+name: ai-foundry
+# metadata:
+#   template: ai-foundry@0.0.1
+infra:
+  provider: bicep
+  path: infra
+
+hooks:
+  postprovision:
+    shell: pwsh
+    run: |
+      Write-Host "=============================================="
+      Write-Host "POST-PROVISION HOOKS STARTED"
+      Write-Host "=============================================="
+      Write-Host "Timestamp: $(Get-Date)"
+      Write-Host ""
+      
+      Push-Location scripts
+      
+      Write-Host "----------------------------------------------"
+      Write-Host "STEP 1: Uploading data to Azure AI Search"
+      Write-Host "----------------------------------------------"
+      Write-Host "Starting: $(Get-Date)"
+      python 01_upload_data_to_search.py
+      if ($LASTEXITCODE -eq 0) {
+        Write-Host "✓ Step 1 completed successfully at $(Get-Date)"
+      } else {
+        Write-Host "✗ Step 1 failed at $(Get-Date)"
+        exit 1
+      }
+      Write-Host ""
+      
+      Write-Host "----------------------------------------------"
+      Write-Host "STEP 2: Deploying Container Apps"
+      Write-Host "----------------------------------------------"
+      Write-Host "Starting: $(Get-Date)"
+      .\02_deploy_container_apps.ps1
+      if ($LASTEXITCODE -eq 0) {
+        Write-Host "✓ Step 2 completed successfully at $(Get-Date)"
+      } else {
+        Write-Host "✗ Step 2 failed at $(Get-Date)"
+        exit 1
+      }
+      Write-Host ""
+      
+      Pop-Location
+      
+      Write-Host "=============================================="
+      Write-Host "POST-PROVISION HOOKS COMPLETED"
+      Write-Host "Finished at: $(Get-Date)"
+      Write-Host "=============================================="
