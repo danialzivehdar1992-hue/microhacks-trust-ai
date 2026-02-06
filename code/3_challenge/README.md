@@ -28,7 +28,7 @@ This completes the DevOps loop and achieves the **Operate stage of Responsible A
 
 ## Lab Activities
 
-## Lab 1 – CI/CD Pipeline with Quality Gate
+## Lab 3 – CI/CD Pipeline with Quality Gate
 
 ### Objective
 
@@ -44,7 +44,7 @@ Execute a prebuilt GitHub Actions workflow that automates building and deploying
 
 ---
 
-### Lab 1 – Instructions
+### Lab 3.1 – Instructions
 
 🧩 Step 1 — Configure the pipeline
 
@@ -113,7 +113,7 @@ Benefits:
 
 ---
 
-## Lab 2 – Configure Observability (Application Insights, Monitor, Traces)
+## Lab 3.2 – Configure Observability (Application Insights, Monitor, Traces)
 
 ### Objective
 
@@ -192,7 +192,7 @@ Metrics include:
 
 ## OPTIONAL Lab
 
-## Lab 3 – Red / Blue Team Simulation  
+## Lab 3.3 – Red / Blue Team Simulation  
 
 ### Objective
 
