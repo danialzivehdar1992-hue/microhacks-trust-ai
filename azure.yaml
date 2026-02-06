@@ -15,6 +15,11 @@ hooks:
       echo "Timestamp: $(date)"
       echo ""
       
+      # Activate virtual environment if it exists
+      if [ -f ".evalenv/bin/activate" ]; then
+        . .evalenv/bin/activate
+      fi
+      
       cd scripts
       
       echo "----------------------------------------------"
@@ -43,8 +48,12 @@ hooks:
       fi
       echo ""
       
+  postup:
+    shell: sh
+    interactive: true
+    run: |
       echo "=============================================="
-      echo "POST-PROVISION HOOKS COMPLETED"
+      echo "Deployment Complete"
       echo "Finished at: $(date)"
       echo "=============================================="
       echo ""
