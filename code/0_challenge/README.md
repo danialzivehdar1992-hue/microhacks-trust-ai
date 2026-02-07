@@ -56,7 +56,7 @@ You can run this Microhack either on your local computer or in GitHub Codespaces
 
 Use the below button to open the Create Codespace page in a new tab. Use the default configuration.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/microhacks-trust-ai?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/microhacks-trust-ai?quickstart=1&fork=true)
 
 1. At the terminal window confirm the home directory ```/microhacks-trust-ai```
 
