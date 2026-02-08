@@ -56,7 +56,7 @@ You can run this Microhack either on your local computer or in GitHub Codespaces
 
 Use the below button to open the Create Codespace page in a new tab. Use the default configuration.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/microhacks-trust-ai?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/microhacks-trust-ai?quickstart=1&fork=true)
 
 1. At the terminal window confirm the home directory ```/microhacks-trust-ai```
 
@@ -174,7 +174,7 @@ A pre-requisite before running AZD UP is to activate your Python Virtual environ
 
 1. Type this question into the prompt window, "What is the out-of-pocket maximum for the Northwind Standard plan?".  The returned answer should mention $6,000 per person per year.
 
-1. Open Foundry Project to see model deployments.  Search for 'gpt-4o-mini' as a model name
+1. Open Foundry Project to see model deployments.  Search for 'gpt-4.1-mini' as a model name
 
 1. Click on Monitor icon and click on the Resource Usage Tab.  For Model deployment, select ```text-embedding-3-large```.  You should see numbers for Total requests and Total Token count
 <br>

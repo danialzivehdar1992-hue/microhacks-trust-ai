@@ -125,7 +125,7 @@ Connect the running application to Application Insights and enable full observab
 
 ### Objective
 
-Analyze chat interactions and thought processes using tracing capabilities.
+Chat interactions can be viewed in the Foundry portal by navigating to **Observe and optimize** → **Tracing**.
 
 - View populated tracing results
 
@@ -148,12 +148,13 @@ Steps:
 
 1. Go to Foundry Portal
 
-1. Select Azure OpenAI instance
+1. Ensure you are in the Foundry Project
 
 1. Navigate to:
-    - Deployments **or**
-    - Monitoring tab
-    - Select model deployment
+    - **Observe and Optimize** in the left-hand menu
+    - Click on the **Monitoring** item
+    - Click on the **Resource Usage** tab
+    - Select model deployment and pick **gpt-4o**
 
 ![view monitoring1](../../media/monitoringmodelmetrics1.png)
 

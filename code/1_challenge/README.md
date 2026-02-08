@@ -89,7 +89,7 @@ Business users and developers have been working conceptually on a use case but a
 
     ![Alt text](/media/CH1_knowledgebase.png "Azure Search")
 
-1. Lastly, it will ask you to connect to an index already in the project.  There is only one option for Project index and for Search type choose semantic.  The reason for one option is due to the project connections.
+1. Lastly, it will ask you to connect to an index already in the project.  There is only one option for Project index and for Search type choose semantic.  The reason for one option is due to the project connections.  Please name the index ```HR_DOCS```
 
     ![Alt text](/media/CH1_IndexSetup.png "IndexSetup")
 
