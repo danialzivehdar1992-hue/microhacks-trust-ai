@@ -168,54 +168,54 @@ async def run_red_team_scan(azure_ai_project: str, credential, backend_url: str)
     # ----------------------------------------------
     # Uncomment this section to run advanced red team scan with multiple attack strategies
     #
-    # print("🔴 Running Advanced Red Team Scan...")
-    # print("   Risk Categories: Violence, HateUnfairness, Sexual, SelfHarm")
-    # print("   Attack Strategies: Multiple transformation techniques")
-    # print()
+    print("🔴 Running Advanced Red Team Scan...")
+    print("   Risk Categories: Violence, HateUnfairness, Sexual, SelfHarm")
+    print("   Attack Strategies: Multiple transformation techniques")
+    print()
     #
     # # Create RedTeam instance with advanced configuration
-    # advanced_red_team = RedTeam(
-    #     azure_ai_project=azure_ai_project,
-    #     credential=credential,
-    #     risk_categories=[
-    #         RiskCategory.Violence,
-    #         RiskCategory.HateUnfairness,
-    #         RiskCategory.Sexual,
-    #         RiskCategory.SelfHarm,
-    #     ],
-    #     num_objectives=5,  # More attacks for comprehensive testing
-    # )
+    advanced_red_team = RedTeam(
+        azure_ai_project=azure_ai_project,
+        credential=credential,
+        risk_categories=[
+            RiskCategory.Violence,
+            RiskCategory.HateUnfairness,
+            RiskCategory.Sexual,
+            RiskCategory.SelfHarm,
+        ],
+        num_objectives=5,  # More attacks for comprehensive testing
+    )
     #
     # # Run the scan with multiple attack strategies
-    # advanced_result = await advanced_red_team.scan(
-    #     target=target_application_callback,
-    #     scan_name="Target-App-Advanced-Scan",
-    #     application_scenario="Container App Backend API - Comprehensive Test",
-    #     attack_strategies=[
+    advanced_result = await advanced_red_team.scan(
+        target=target_application_callback,
+        scan_name="Target-App-Advanced-Scan",
+        application_scenario="Container App Backend API - Comprehensive Test",
+        attack_strategies=[
     #         AttackStrategy.EASY,          # Group of easy complexity attacks
-    #         AttackStrategy.MODERATE,      # Group of moderate complexity attacks
+            AttackStrategy.MODERATE,      # Group of moderate complexity attacks
     #         AttackStrategy.Base64,        # Base64 encoding
     #         AttackStrategy.ROT13,         # ROT13 encoding
     #         AttackStrategy.CharacterSpace, # Add character spaces
     #         AttackStrategy.UnicodeConfusable, # Unicode confusables
-    #     ],
-    # )
+        ],
+     )
     #
     # # Save advanced results
-    # advanced_output_path = OUTPUT_DIR / "advanced_scan_results.json"
-    # with open(advanced_output_path, "w") as f:
-    #     result_dict = advanced_result if isinstance(advanced_result, dict) else vars(advanced_result)
-    #     json.dump(result_dict, f, indent=2, default=str)
-    # print(f"✅ Advanced scan complete. Results saved to: {advanced_output_path}")
-    # print()
+    advanced_output_path = OUTPUT_DIR / "advanced_scan_results.json"
+    with open(advanced_output_path, "w") as f:
+        result_dict = advanced_result if isinstance(advanced_result, dict) else vars(advanced_result)
+        json.dump(result_dict, f, indent=2, default=str)
+    print(f"✅ Advanced scan complete. Results saved to: {advanced_output_path}")
+    print()
     #
     # # Display advanced metrics
-    # print("📊 Advanced Scan Metrics:")
-    # if hasattr(advanced_result, "metrics"):
-    #     pprint(advanced_result.metrics)
-    # elif isinstance(advanced_result, dict) and "metrics" in advanced_result:
-    #     pprint(advanced_result["metrics"])
-    # print()
+    print("📊 Advanced Scan Metrics:")
+    if hasattr(advanced_result, "metrics"):
+        pprint(advanced_result.metrics)
+    elif isinstance(advanced_result, dict) and "metrics" in advanced_result:
+        pprint(advanced_result["metrics"])
+    print()
     
     # ----------------------------------------------
     # 5. Display Summary
@@ -226,7 +226,7 @@ async def run_red_team_scan(azure_ai_project: str, credential, backend_url: str)
     print()
     print("📁 Results Location:")
     print(f"   Basic Scan: {basic_output_path}")
-    # print(f"   Advanced Scan: {advanced_output_path}")  # Uncomment when running advanced scan
+    print(f"   Advanced Scan: {advanced_output_path}")  # Uncomment when running advanced scan
     print()
     print("📈 Key Metrics to Review:")
     print("   - Attack Success Rate (ASR): % of attacks that elicited harmful content")

@@ -97,7 +97,13 @@ Business users and developers have been working conceptually on a use case but a
 
     ![Alt text](/media/CH1_Agentchat.png "Agent Chat")
 
-1. Compare the results with your ground truth data to see if agent is able to answer your questions sufficiently.
+1. Compare the results with your ground truth data to see if agent is able to answer your questions sufficiently.  There is also an AI quality score for coherence, fluency and relevance which an AI Judge scores and provides a reason code in the Agent Playground.
+
+    ![Alt text](/media/CH_1_Agent_Manual_eval.png "Agent Playground Eval Score")
+
+1. Click on View Run Info button next to Tools in the same menu as AI quality.  This will share the thread for the question.  On the far right click on the evaluations header to see the actual score for each quality evaluator and an explanation.  Run a few questions to see if you have the right model and the results are acceptable.  This helps you run manual evaluations to approve your prototype for development.
+
+    ![Alt text](/media/CH_Trace_eval.png "Agent Score & Reason code in Trace")
 
 ---
 
