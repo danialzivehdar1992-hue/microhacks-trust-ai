@@ -9,17 +9,17 @@ echo "⚡ Installing UV package manager..."
 pip install --upgrade pip
 pip install uv
 
-python -m venv .venv
+# python -m venv .venv
 
-# Activate virtual environment
-source .venv/bin/activate
+# # Activate virtual environment
+# source .venv/bin/activate
 
-# Install app requirements (Streamlit, FastAPI, etc.)
-echo "📚 Installing app requirements..."
-uv pip install -r ./app/requirements.txt
+# # Install app requirements (Streamlit, FastAPI, etc.)
+# echo "📚 Installing app requirements..."
+# uv pip install -r ./app/requirements.txt
 
-# Deactivate virtual environment
-deactivate  
+# # Deactivate virtual environment
+# deactivate  
 
 # Create Python virtual environment
 echo "📦 Creating Python virtual environment (.evalenv)..."

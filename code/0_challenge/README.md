@@ -13,14 +13,14 @@ We will set up the initial environment for you to build on top of during your Mi
 
 ## Prerequisites for Local Environments (Linux, Windows or Mac)
 
-1. A computer running Windows 11, macOS, or Linux.  
-1. An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/).
-1. Install the [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
-1. [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-1. Install [Powershell 7 (supported on Windows, macOS, and Linux)](https://learn.microsoft.com/powershell/scripting/install/installing-powershell).
-1. Install [Python 3.13](https://www.python.org/downloads/).
-1. Install the Git CLI. You can download it from the [Git website](https://git-scm.com/downloads).
-1. Install VS Code on your local PC if not using Codespaces.
+- A computer running Windows 11, macOS, or Linux.
+- An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/).
+- Install the [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+- [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- Install [Powershell 7 (supported on Windows, macOS, and Linux)](https://learn.microsoft.com/powershell/scripting/install/installing-powershell).
+- Install [Python 3.13](https://www.python.org/downloads/).
+- Install the Git CLI. You can download it from the [Git website](https://git-scm.com/downloads).
+- Install VS Code on your local PC if not using Codespaces.
 <br>
 
 ## Support Software
@@ -34,8 +34,8 @@ We will set up the initial environment for you to build on top of during your Mi
 
 ## Prerequisites for CodeSpaces
 
-1. An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/).
-1. Validate [Python 3.13](https://www.python.org/downloads/) is setup in your environment or lower
+- An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/).
+- Validate [Python 3.13](https://www.python.org/downloads/) is setup in your environment or lower
 <br>
 
 ## Recommended Regions
@@ -54,13 +54,20 @@ You can run this Microhack either on your local computer or in GitHub Codespaces
 
 ## Setup your Development Environment on Codespaces (recommended)
 
-Use the below button to open the Create Codespace page in a new tab. Use the default configuration.
+You first need to fork this repo into your GitHub account. Use the below button to do that.
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/microhacks-trust-ai?quickstart=1&fork=true)
+[![Fork this repo](https://img.shields.io/badge/Fork%20this%20repo-blue?logo=github)](https://github.com/microsoft/microhacks-trust-ai/fork)
 
-1. At the terminal window confirm the home directory ```/microhacks-trust-ai```
+Create a Codespace from your fork:
 
-1. Activate Python Virtual Environment (Linux)
+- Your fork should have opened automatically after you clicked the above button, but if it didn't, go to your fork (e.g., `https://github.com/<your-username>/microhacks-trust-ai`).
+- Click the green **<> Code** button, then select the **Codespaces** tab.
+- Click **Create codespace on main** (use the default configuration).
+
+
+At the terminal window confirm the home directory ```/microhacks-trust-ai```
+
+- Activate Python Virtual Environment (Linux)
 
     ```bash
     source .evalenv/bin/activate
@@ -73,7 +80,7 @@ Use the below button to open the Create Codespace page in a new tab. Use the def
 <details markdown=1>
 <summary markdown="span"><strong>Click to expand/collapse Local Workstation instructions</strong></summary>
 
-1. Start the Microhack on a local environment.
+- Start the Microhack on a local environment.
 
     a. Open a terminal window for local deployments and confirm prerequisites are complete
         
@@ -85,12 +92,12 @@ Use the below button to open the Create Codespace page in a new tab. Use the def
 
     * At the terminal window confirm the home directory ```/microhacks-trust-ai```
 
-1. Make a new Python virtual environment and activate it.  
+- Make a new Python virtual environment and activate it.  
 
     ```bash
     python -m venv .evalenv
     ```
-1. Activate the Python Virtual Environment
+- Activate the Python Virtual Environment
 
     **Mac OS X or Linux** 
     ```
@@ -102,19 +109,19 @@ Use the below button to open the Create Codespace page in a new tab. Use the def
     .evalenv\Scripts\Activate.ps1
     ```
 
-1. Install UV to expediate the pip installation
+- Install UV to expediate the pip installation
 
     ```bash
     pip install uv
     ```
 
-1. PIP install the requirements into your virtual environment
+- PIP install the requirements into your virtual environment
     
     ```bash
     uv pip install -r ./scripts/requirements.txt
     ```
 
-1. Prep for postprovision hook
+- Prep for postprovision hook
     
     **Mac OS X or Linux**
 
@@ -136,19 +143,55 @@ Use the below button to open the Create Codespace page in a new tab. Use the def
 
 A pre-requisite before running AZD UP is to activate your Python Virtual environment to ```.evalenv```.  This is step 3 in the local workstation section.
 
-1. Login to your Azure Developer Account in the terminal window
+***Important: Click to expand one of the following sections depending on whether you have a Microsoft FDPO Internal or External (or non-Microsoft provided) Azure subscription***
+<details markdown=1>
+<summary markdown="span"><strong>Click to expand Microsoft FDPO Internal instructions</strong></summary>
+- You will need your Azure tenant ID for your Microsoft FDPO Internal subscription. One way to get that is by going to the Azure portal, click your username in the upper right corner, and select Switch Directory. Your Tenant ID should be the Directory ID for the fdpo.onmicrosoft.com domain. 
+
+- Visual Studio Code for the Web does not support logging into your FDPO internal Azure subscription. Once you open your Codespace, you will need to click the blue Codespaces text in the lower right corner of VS Code for the Web and select Open in VS Code Desktop. This will open the same GitHub Codespace but in your VS Code Desktop. 
+
+- Login to your Azure Developer Account in the terminal window. This will open a browser window where you should login using your @microsoft.com credentials. 
+
+    ```bash
+    azd auth login --tenant-id <YOUR_TENANT_ID>
+    ```
+
+- Before you run login to the Azure CLI, this workaround is required. Enter this in the terminal window (**note**: this seems unintuitive but is required because device code authentication is not supported with FDPO internal)
+
+    ```bash
+    CODESPACES=false
+    ```
+
+- Login to your Azure Account in the terminal window
+
+    ```bash
+    az login --tenant <YOUR_TENANT_ID>
+    ```
+
+</details>
+
+<details markdown=1>
+<summary markdown="span"><strong>Click to expand Microsoft FDPO External or non-Microsoft employee provided Azure instructions</strong></summary>
+
+- Login to your Azure Developer Account in the terminal window
 
     ```bash
     azd auth login
     ```
 
-1. Login to your Azure Account in the terminal window
+- Login to your Azure Account in the terminal window
 
     ```bash
     az login
     ```
 
-1. Create a new azd environment
+</details>
+
+
+<br>
+Once you have logged into the Azure Developer CLI and Azure CLI using one of the methods above, create a new azd environment
+
+- Create a new azd environment
 
     ```bash
     azd env new
@@ -156,7 +199,7 @@ A pre-requisite before running AZD UP is to activate your Python Virtual environ
 
     Enter a name that will be used for the resource group.  This will create a new `.azure` folder and set it as the active environment for any calls to azd going forward.
 
-1. Run the bicep scripts with the following command:
+- Run the bicep scripts with the following command:
 
     ```bash
     azd up
@@ -164,7 +207,7 @@ A pre-requisite before running AZD UP is to activate your Python Virtual environ
 
     This will provision Azure resources and deploy this sample to those resources, including building the search index based on the files found in the `./data` folder.  
 
-1. Open URL for RAGCHAT application printed in the terminal console similar to the below picture. <br>
+- Open URL for RAGCHAT application printed in the terminal console similar to the below picture. <br>
 
 ![Alt text](/media/ragchatterminal.png "RAGCHAT Terminal")
 
@@ -172,11 +215,11 @@ A pre-requisite before running AZD UP is to activate your Python Virtual environ
 
 ## Success Criteria
 
-1. Type this question into the prompt window, "What is the out-of-pocket maximum for the Northwind Standard plan?".  The returned answer should mention $6,000 per person per year.
+- Type this question into the prompt window, "What is the out-of-pocket maximum for the Northwind Standard plan?".  The returned answer should mention $6,000 per person per year.
 
-1. Open Foundry Project to see model deployments.  Search for 'gpt-4.1-mini' as a model name
+- Open Foundry Project to see model deployments.  Search for 'gpt-4.1-mini' as a model name
 
-1. Click on Monitor icon and click on the Resource Usage Tab.  For Model deployment, select ```text-embedding-3-large```.  You should see numbers for Total requests and Total Token count
+- Click on Monitor icon and click on the Resource Usage Tab.  For Model deployment, select ```text-embedding-3-large```.  You should see numbers for Total requests and Total Token count
 <br>
 
 ## Continue to Challenge 1

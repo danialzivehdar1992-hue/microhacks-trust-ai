@@ -57,9 +57,9 @@ In Challenge 1, we tested our application with a small subset of questions and h
     python ./scripts/04_run_evaltarget.py
     ```
 
-   This evaluation will take approximately 20 seconds to complete. The Target application is running in a container and might need you to rerun this script multiple times when it times-out.  Go into the Microsoft Foundry and review the Automated Evaluations.  Review each Q&A pair for these scores and reason.  The script submits just 5 question & answer pairs to shorten execution time.
+   This evaluation will take approximately 20 seconds to complete. The Target application is running in a container and might need you to rerun this script multiple times when it times-out.  Go into the Microsoft Foundry and review the Automated Evaluations.  Review each Q&A pair for these scores and reason.  The script submits just 11 question & answer pairs to shorten execution time.
 
-1. For each metric, review the number of success and failures in the Foundry portal to see overall success rate.  
+1. For each metric, review the number of success and failures in the Foundry portal to see overall success rate.  There is one question which fails due to the ground truth data having a typo.  This is intentional but demonstrates the need to review your questoins & ground truth data before running evaluations.  The correct value should be $2,000.  Due to time skip any fixes but sharing for guidance.
 
    ![Alt text](/media/ai-quality-ai-assisted-chart.png "AI Quality Metrics")
 
@@ -87,7 +87,7 @@ Automated Quality & Safety evaluations have validated our application meets our 
 
 The AI Red Team Agent will be able to assess risk categories and attack strategies to assess the Attack Success Rate of your application.  The lower the score, the more secure your application.  The justification for these tests is to run simulations of attacks based on known threats.  It is recommended to conduct both automated and human red teaming to cover the known and unknown attack strategies before you roll out to production.
 
-1. Execute the Red Team agent script.  The Red Teaming agent will use a library of [attack prompts across categories](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/run-scans-ai-red-teaming-agent?view=foundry-classic#supported-risk-categories) (privacy, toxicity, jailbreak attempts, etc.) as defined by RiskCategories in PyRIT.
+1. Execute the Red Team agent script.  The Red Teaming agent will use a library of [attack prompts across categories](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/run-scans-ai-red-teaming-agent?view=foundry-classic#supported-risk-categories) By default, the script runs a baseline scan with no attack transformations. An advanced scan with multiple attack strategies (e.g., MODERATE, Base64, ROT13) is available but commented out in the script.
 
    ```bash
    python ./scripts/06_redteameval.py 
@@ -95,7 +95,7 @@ The AI Red Team Agent will be able to assess risk categories and attack strategi
 
 1. The [AI Red teaming results](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/run-scans-ai-red-teaming-agent?view=foundry-classic#results-from-your-automated-scans) typically categorizes findings like: number of attempts where the LLM gave a policy-violating response vs. how many it safely refused. Focus on critical categories: Did the LLM ever reveal the content of its system prompt or internal knowledge (a sign of prompt injection success)? Did it produce disallowed content (e.g., instructions to do something harmful) when provoked?  
 
-1. After the scan, review the results carefully. If any serious red team findings appear, this is a fail. For instance, if the report shows the LLM gave out the full text of one of the confidential source documents when asked in a tricky way (data leakage), or it complied with an instruction like “ignore previous rules”, then you’ve got a major issue to fix.
+1. After the scan, review the results carefully. The baseline "Basic" scan will typically have an ASR (Attack Success Rate) of 0%, meaning the Red Team agent was unable to elicit harmful responses. If you enable the advanced scan (commented out in the script), you may see a higher ASR as more sophisticated attack strategies are applied. This demonstrates the importance of Red Teaming to ensure you run a thorough evaluation of your Generative AI application, giving you greater confidence that it is ready for a production environment.
 
     ![Alt text](/media/ai-red-team-data.png "AI Red Team Results")
 

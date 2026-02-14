@@ -99,7 +99,17 @@ Once the workflow gets completed, it will publish results in your Foundry.
 
 ![CH3-FoundryEval1](../../media/CH3-FoundryEval1.jpg)
 
-![CH3-FoundryEval2](../../media/CH3-FoundryEval2.jpg)
+Click on Swith to Dashboard view button for us to compare our baseline evaluation in CH2 against the new one in CH3. 
+
+![CH3-FoundryEval2](../../media/CH3_SwitchDashboard.png)
+
+Click on the view icon for the two evaluations to make them visible for comparison.
+
+![CH3-FoundryEval2](../../media/CH3_Compareevalview.png)
+
+Review the results for each evaluation run.  Compare your baseline run in CH2 against the deployment to production to see the direction of the evaluation results.  You will be able to see both runs side by side and delta change in metrics and responses from the LLMs.  This will be your last step post-deployment to give a green light to your application.
+
+![CH3-FoundryEval2](../../media/CH3_Eval_Compare.png)
 
 🚀 Production Recommendations
 
